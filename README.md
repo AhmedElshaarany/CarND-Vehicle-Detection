@@ -79,7 +79,7 @@ Here's a [link to my video result](https://youtu.be/JvMm-sQcA2U)
 
 ####2. Removing False Positives and Combining Bounding Boxes
 
-In order to remove false positives, I recorded the positions of positive detections over 10 consecutive video frames. From the positive detections of these 10 frames, I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
+In order to remove false positives, I recorded the positions of positive detections over 10 consecutive video frames. From the positive detections of these 10 frames, I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected. I used an OOP approach to be able to keep track of previous frames. This can be found in the second to last cell of the IPyhton Notebook.
 
 Here's an example result showing the heatmap from a series of frames of video, the `scipy.ndimage.measurements.label()` method was used to create a bounding box to cover the area of each detected blob:
 
