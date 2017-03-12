@@ -65,12 +65,16 @@ For the searching the images for cars, I would extract the hog-features of the w
 
 Ultimately I searched on three scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result. It is worth mentioning that I used a different vertical search area for each scale to minimize the processing time. Also, it made sense to only search the lower half of the image for cars. Here are some example images:
 
-![alt text][image4]
+![alt text][image3]
 ---
 
 ### Video Implementation
 
-Here's a [link to my video result](./lane_and_vehicle_detection.mp4)
+####1. Applying Lane and Vehicle Detection
+
+I used the ouput of the previous project and applied vehcile detection to have a pipeline that detects the lane and cars.
+
+Here's a [link to my video result](https://youtu.be/JvMm-sQcA2U)
 
 
 ####2. Removing False Positives and Combining Bounding Boxes
