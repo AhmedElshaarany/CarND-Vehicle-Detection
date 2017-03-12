@@ -1,5 +1,5 @@
-##Writeup Template
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+## Advanced Lane Finding Project Writeup
+[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
 ---
 
@@ -15,8 +15,8 @@ The goals / steps of this project are the following:
 * Estimate a bounding box for vehicles detected.
 
 [//]: # (Image References)
-[image1]: ./examples/car_not_car.png
-[image2]: ./examples/HOG_example.jpg
+[image1]: ./output_images/car_not_car.png
+[image2]: ./output_images/HOG_example.png
 [image3]: ./examples/sliding_windows.jpg
 [image4]: ./examples/sliding_window.jpg
 [image5]: ./examples/bboxes_and_heat.png
@@ -28,36 +28,38 @@ The goals / steps of this project are the following:
 ###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
 
 ---
-###Writeup / README
-
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.  
-
-You're reading it!
 
 ###Histogram of Oriented Gradients (HOG)
 
-####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
+####1. HOG Features Extraction
 
-The code for this step is contained in the first code cell of the IPython notebook (or in lines # through # of the file called `some_file.py`).  
-
-I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
+I started by reading in all the vehicle and non-vehicle images in the first code cell of the IPython notebook. Here is an example of one of each of the vehicle and non-vehicle classes:
 
 ![alt text][image1]
 
 I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
-Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
-
+Here is an example using the `RGB` color space and HOG parameters of `orientations=6`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`in cell 4 of the IPython Notebook:
 
 ![alt text][image2]
 
-####2. Explain how you settled on your final choice of HOG parameters.
+####2. Choosing HOG Features
 
-I tried various combinations of parameters and...
+I tried various combinations of HOG parameters and color spaces, and it was interesting to see how the classifier accuracy changed with the different combinations. After getting an classification accuracy between 99-100%, I settled on the following parameters and color space ( Final values were used in the final cell of the IPython Notebook ):
 
-####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+| Parameter              | Value   | 
+|:----------------------:|:-------:| 
+| Color Space            | YCrCb   | 
+| orientations           | 9       |
+| pixels_per_cell        | (8,8)   |
+| cells_per_block        | (2,2)   |
+| hog_channels           | 'ALL'   |
+| spatial_size           | (32,32) |
+| histogram_bins         | 32      |
 
-I trained a linear SVM using...
+####3. Training a Linear SVM Classifier
+
+I trained a linear SVM using the selected HOG features along with the histogram of the color channels and the spatial binning of the colors. These features were all combined into one feature vector that resulted in a high accuracy classifier. The code for training can be found in cell 5 of the IPython Notebook.
 
 ###Sliding Window Search
 
